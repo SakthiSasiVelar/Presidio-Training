@@ -18,7 +18,7 @@ namespace Task_6
             this.experience = experience;
         }
 
-        public  void printDoctorDetails()
+        public  void PrintDoctorDetails()
         {
             Console.WriteLine($" Doctor Name  : {this.name}\n Doctor id : {this.id} \n Doctor Experience : {this.experience}");
         }
