@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CowBullGame app", "CowBullGame app\CowBullGame app.csproj", "{B71C0A4F-A15E-43BF-B161-F7F0C45601FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B71C0A4F-A15E-43BF-B161-F7F0C45601FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B71C0A4F-A15E-43BF-B161-F7F0C45601FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B71C0A4F-A15E-43BF-B161-F7F0C45601FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B71C0A4F-A15E-43BF-B161-F7F0C45601FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF963AE1-859F-4CAD-AF85-020103150922}
+	EndGlobalSection
+EndGlobal
