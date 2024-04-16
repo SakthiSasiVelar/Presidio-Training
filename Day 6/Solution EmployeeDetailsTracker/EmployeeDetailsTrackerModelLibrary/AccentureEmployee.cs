@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EmployeeDetailsTrackerModelLibrary
 {
-    public class Accenture : Employee , GovtRules
+    public class AccentureEmployee : Employee , IGovtRules
     {
-        public Accenture(int empid, string empName, string dept, string desg, double basicSalary) : base(empid , empName , dept , desg , basicSalary)
+        public AccentureEmployee(int empid, string empName, string dept, string desg, double basicSalary) : base(empid , empName , dept , desg , basicSalary)
         {
             NameOfCompany = "Accenture";
         }
@@ -30,12 +30,10 @@ namespace EmployeeDetailsTrackerModelLibrary
             return 0;
         }
 
-        public void printDetails()
+        public override void PrintDetails()
         {
-            Console.WriteLine("Enter year of experience :");
-            int serviceCompleted = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"id : {EmployeeId}\n name : {EmployeeName}\n dept : {Department} \n desg : {Designation} \n basicSalary : {BasicSalary} : name of the company : {NameOfCompany}\n " +
-                $" Employee pf : {EmployeePF(BasicSalary)}\n  Employee LeaveDetails : {LeaveDetails()}\n Employee gratuity amount : {GratuityAmount(serviceCompleted, BasicSalary)} ");
+            base.PrintDetails();
+            Console.WriteLine($" EmployeePF : {EmployeePF(BasicSalary)}\n Leave Details : {LeaveDetails()}\n Gratuity Amount : {GratuityAmount(serviceCompleted, BasicSalary)}");
         }
     }
 }
