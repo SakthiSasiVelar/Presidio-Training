@@ -295,21 +295,20 @@ namespace Pizza_Selling_Store_Management_application
             
         }
 
-        void DuplicatePizzaAdd()
-        {
-            Pizza pizza1 = new Pizza("Margherita", "Tomato", "Medium", 180.0 , "YES");
-            Pizza pizza2 = new Pizza("Pepperoni", "Cheese", "Large", 200.0 , "NO");
-
-            try{
-                pizzaBL.AddPizza(pizza1);
-                pizzaBL.AddPizza(pizza2);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            
-        }
+        //void DuplicatePizzaAdd()
+      //  {
+      //      Pizza pizza1 = new Pizza("Margherita", "Tomato", "Medium", 180.0 , "YES");
+      //      Pizza pizza2 = new Pizza("Pepperoni", "Cheese", "Large", 200.0 , "NO");
+       //     try{
+      //          pizzaBL.AddPizza(pizza1);
+      //          pizzaBL.AddPizza(pizza2);
+       //     }
+      //      catch (Exception e)
+      //      {
+      //          Console.WriteLine(e.Message);
+       //     }
+      //      
+       // }
 
         void DeletePizza()
         {
@@ -328,7 +327,7 @@ namespace Pizza_Selling_Store_Management_application
 
         void StartUser()
         {
-            DuplicatePizzaAdd();
+            //DuplicatePizzaAdd();
             int ch;
 
             do
@@ -377,7 +376,7 @@ namespace Pizza_Selling_Store_Management_application
                         break;
 
                 }
-            } while (ch != 3);
+            } while (ch != 5);
         }
         void Start()
         {
