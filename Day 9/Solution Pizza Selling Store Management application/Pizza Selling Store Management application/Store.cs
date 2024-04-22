@@ -236,6 +236,11 @@ namespace Pizza_Selling_Store_Management_application
             } while( pizzaId != 0 );
 
             if(pizzaId == 0) {
+                if(cart.Count == 0)
+                {
+                    Console.WriteLine("No items in the cart , add items to order");
+                    return;
+                }
                 if(!PlaceOrder())Console.WriteLine("Ordered not successfully done , please re try");
                 Console.WriteLine("Ordered Successfully");
                 cart = [];
@@ -295,20 +300,6 @@ namespace Pizza_Selling_Store_Management_application
             
         }
 
-        //void DuplicatePizzaAdd()
-      //  {
-      //      Pizza pizza1 = new Pizza("Margherita", "Tomato", "Medium", 180.0 , "YES");
-      //      Pizza pizza2 = new Pizza("Pepperoni", "Cheese", "Large", 200.0 , "NO");
-       //     try{
-      //          pizzaBL.AddPizza(pizza1);
-      //          pizzaBL.AddPizza(pizza2);
-       //     }
-      //      catch (Exception e)
-      //      {
-      //          Console.WriteLine(e.Message);
-       //     }
-      //      
-       // }
 
         void DeletePizza()
         {
@@ -327,7 +318,6 @@ namespace Pizza_Selling_Store_Management_application
 
         void StartUser()
         {
-            //DuplicatePizzaAdd();
             int ch;
 
             do
