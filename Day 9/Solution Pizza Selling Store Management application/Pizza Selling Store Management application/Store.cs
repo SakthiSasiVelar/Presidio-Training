@@ -39,7 +39,7 @@ namespace Pizza_Selling_Store_Management_application
         void AdminMenu()
         {
             Console.WriteLine("-------------ADMIN ACTIONS----------");
-            Console.WriteLine(" 1. Add Pizza\n 2. Get Report 3.\n Delete Pizza \n  4. Pizza Menu \n 5.Exit ");
+            Console.WriteLine(" 1. Add Pizza\n 2. Get Report \n 3. Delete Pizza \n 4. Pizza Menu \n 5.Exit ");
         }
 
         int GetChoice()
