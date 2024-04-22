@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Pizza_Selling_Store_Management_application</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pizza Store BL Library\Pizza Store BL Library.csproj" />
+    <ProjectReference Include="..\Pizza Store Model library\Pizza Store Model library.csproj" />
+  </ItemGroup>
+
+</Project>

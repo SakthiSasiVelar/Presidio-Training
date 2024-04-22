@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Pizza_Store_BL_Library</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pizza Store DAL library\Pizza Store DAL library.csproj" />
+    <ProjectReference Include="..\Pizza Store Exception Library\Pizza Store Exception Library.csproj" />
+    <ProjectReference Include="..\Pizza Store Model library\Pizza Store Model library.csproj" />
+  </ItemGroup>
+
+</Project>
