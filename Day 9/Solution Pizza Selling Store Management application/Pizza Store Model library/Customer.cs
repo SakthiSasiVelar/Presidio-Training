@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Pizza_Store_Model_library
 {
+    /// <summary>
+    /// Customer have customer information
+    /// </summary>
+    /// <parameter name="Id"> customer Id </parameter>
+    /// <parameter name="Name"> name of the customer </parameter>
+    /// <parameter name="Address">address of the customer  </parameter>
+    /// <parameter name="Phone number"> phone number of the customer </parameter>
     public class Customer
     {
         public int Id { get; set; }

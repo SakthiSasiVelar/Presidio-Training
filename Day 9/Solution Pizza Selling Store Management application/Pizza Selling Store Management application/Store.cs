@@ -39,7 +39,7 @@ namespace Pizza_Selling_Store_Management_application
         void AdminMenu()
         {
             Console.WriteLine("-------------ADMIN ACTIONS----------");
-            Console.WriteLine(" 1. Add Pizza\n 2. Get Report \n 3.Exit ");
+            Console.WriteLine(" 1. Add Pizza\n 2. Get Report 3.\n Delete Pizza \n  4. Pizza Menu \n 5.Exit ");
         }
 
         int GetChoice()
@@ -55,10 +55,10 @@ namespace Pizza_Selling_Store_Management_application
             {
                 List<Pizza> pizzaList = pizzaBL.GetAllPizzaList();
                 Console.WriteLine("-----------Menu----------");
-                Console.WriteLine("Pizza-Id   | Pizza-Name   |   Ingredients |  Size  | \t Price ");
+                Console.WriteLine("Pizza-Id   | Pizza-Name   |   Ingredients |  Size  | \t Price  | Availability ");
                 foreach (Pizza pizza in pizzaList)
                 {
-                    Console.WriteLine($"\t{pizza.Id}  | {pizza.Name}   | \t{pizza.Ingredients}   | \t {pizza.Size}  | \t{pizza.Price} ");
+                    Console.WriteLine($"\t{pizza.Id}  | {pizza.Name}   | \t{pizza.Ingredients}   | \t {pizza.Size}  | \t{pizza.Price} | \t{pizza.AvailabilityStatus}");
                 }
             }
             catch(Exception ex)
@@ -73,11 +73,22 @@ namespace Pizza_Selling_Store_Management_application
             return Convert.ToInt32(Console.ReadLine());
         }
 
+        bool CheckForAvailability(Pizza pizza)
+        {
+            if (pizza.AvailabilityStatus == "YES") return true;
+            return false;
+        }
+
         bool IsValidcheckGivenPizzaId(int pizzaId)
         {
             try
             {
                 Pizza result = pizzaBL.GetPizzaById(pizzaId);
+                if (!CheckForAvailability(result))
+                {
+                    Console.WriteLine("The pizza you selected is not available , select any other pizza");
+                    return false;
+                }
                 return true;
 
             }
@@ -146,6 +157,7 @@ namespace Pizza_Selling_Store_Management_application
                     Console.WriteLine (ex.Message);
                 }
             }
+            Console.WriteLine("Delivery Charge : 50");
             Console.WriteLine($"Total price : {amount}");
             Console.WriteLine($"Delivery preference : {DeliveryPreference}");
             if(DeliveryPreference == "delivery")
@@ -153,7 +165,21 @@ namespace Pizza_Selling_Store_Management_application
                 Console.WriteLine($"Delivery Address : {deliveryAddress}");
             }
         }
-        void PlaceOrder()
+
+        bool AddOrderInOrderList(Order order)
+        {
+            try
+            {
+                orderBL.AddOrder(order);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        bool PlaceOrder()
         {
             Customer customer = GetCustomerDetails();
             try
@@ -177,12 +203,20 @@ namespace Pizza_Selling_Store_Management_application
                 }
 
                 Order order = new Order(customer, cart, deliveryPreference, totalAmount, deliveryAddress);
+                if (!AddOrderInOrderList(order))
+                {
+                    return false;
+
+                };
                 PrintOrderDetails(cart, deliveryPreference, totalAmount, deliveryAddress);
+                return true;
+
             }
             catch( Exception ex )
             {
                 Console.WriteLine (ex.Message);
             }
+            return false;
                   
         }
 
@@ -202,7 +236,7 @@ namespace Pizza_Selling_Store_Management_application
             } while( pizzaId != 0 );
 
             if(pizzaId == 0) {
-                PlaceOrder();
+                if(!PlaceOrder())Console.WriteLine("Ordered not successfully done , please re try");
                 Console.WriteLine("Ordered Successfully");
                 cart = [];
             }
@@ -219,8 +253,10 @@ namespace Pizza_Selling_Store_Management_application
             string size = Console.ReadLine();
             Console.WriteLine("Pizza price :");
             double price = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter availability status: ");
+            string availabilityStatus = Console.ReadLine().ToUpper();
 
-            Pizza pizza = new Pizza(name , ingredient , size , price);
+            Pizza pizza = new Pizza(name , ingredient , size , price , availabilityStatus);
             try
             {
                 pizzaBL.AddPizza(pizza);
@@ -249,7 +285,7 @@ namespace Pizza_Selling_Store_Management_application
                         else ordered_items = ordered_items + ", " + order.orderedItems[i].ToString();
 
                     }
-                    Console.WriteLine($"{order.Id}   |  {order.customer.Name}    |   {ordered_items}   |  {order.DeliveryPreference}  |  {order.DeliveryAddress}  | {order.TotalAmount}");
+                    Console.WriteLine($"\t{order.Id}   |  \t{order.customer.Id}    |   \t{ordered_items}   |  \t{order.DeliveryPreference}  | \t {order.DeliveryAddress}  | \t{order.TotalAmount}");
                 }
             }
             catch(Exception e)
@@ -259,10 +295,10 @@ namespace Pizza_Selling_Store_Management_application
             
         }
 
-        void duplicatePizzaAdd()
+        void DuplicatePizzaAdd()
         {
-            Pizza pizza1 = new Pizza("Margherita", "Tomato", "Medium", 180.0);
-            Pizza pizza2 = new Pizza("Pepperoni", "Cheese", "Large", 200.0);
+            Pizza pizza1 = new Pizza("Margherita", "Tomato", "Medium", 180.0 , "YES");
+            Pizza pizza2 = new Pizza("Pepperoni", "Cheese", "Large", 200.0 , "NO");
 
             try{
                 pizzaBL.AddPizza(pizza1);
@@ -275,9 +311,24 @@ namespace Pizza_Selling_Store_Management_application
             
         }
 
+        void DeletePizza()
+        {
+            Console.WriteLine("Enter id of pizza to delete :");
+            int deleteId = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                int result = pizzaBL.DeletePizza(deleteId);
+                Console.WriteLine($"Pizza with id {deleteId} successfully deleted");
+            }
+            catch( Exception e )
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
         void StartUser()
         {
-            duplicatePizzaAdd();
+            DuplicatePizzaAdd();
             int ch;
 
             do
@@ -316,6 +367,12 @@ namespace Pizza_Selling_Store_Management_application
                         Report();
                         break;
                     case 3:
+                        DeletePizza();
+                        break;
+                    case 4:
+                        GetPizzaMenu();
+                        break;
+                    case 5:
                         Console.WriteLine("thank you visit again");
                         break;
 
@@ -338,7 +395,7 @@ namespace Pizza_Selling_Store_Management_application
                         StartUser();
                         break;
                 }       
-            } while (userType != 0);     
+            } while (userType != 3);     
         }
 
 
