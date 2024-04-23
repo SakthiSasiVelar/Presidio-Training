@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Appointment_Booking_application_BL_Library</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AB Appication BL Custom Exception Library\AB Appication BL Custom Exception Library.csproj" />
+    <ProjectReference Include="..\Appointment Booking Application DAL Library\Appointment Booking Application DAL Library.csproj" />
+    <ProjectReference Include="..\Appointment Booking Application Model Library\Appointment Booking Application Model Library.csproj" />
+  </ItemGroup>
+
+</Project>
