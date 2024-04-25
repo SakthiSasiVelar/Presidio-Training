@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Shopping_BL_Library</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shopping DAL Library\Shopping DAL Library.csproj" />
+    <ProjectReference Include="..\Shopping Model Library\Shopping Model Library.csproj" />
+  </ItemGroup>
+
+</Project>
