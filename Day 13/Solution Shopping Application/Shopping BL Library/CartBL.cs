@@ -14,14 +14,14 @@ namespace Shopping_BL_Library
             cartItemBL = new CartItemBL();
             cartRepository = new CartRepository();
         }
-        public int AddCart(Cart item)
+        public async Task<int> AddCart(Cart item)
         {
             try
             {
-                int currentCartItemQuantity = cartItemBL.GetCartItemQuantity(item.Id);
+                int currentCartItemQuantity = await cartItemBL.GetCartItemQuantity(item.Id);
                 if (currentCartItemQuantity < 5)
                 {
-                    Cart result = cartRepository.Add(item);
+                    Cart result = await cartRepository.Add(item);
                     return result.Id;
 
                 }
@@ -35,12 +35,12 @@ namespace Shopping_BL_Library
 
         }
 
-        public double GetCartItemsAmount(Cart cart)
+        public async Task<double> GetCartItemsAmount(Cart cart)
         {
             double totalAmount = 0;
             foreach(CartItem item in cart.CartItems)
             {
-                double itemPrice = cartItemBL.GetCartItemPrice(item);
+                double itemPrice = await cartItemBL.GetCartItemPrice(item);
                 totalAmount += itemPrice;
             }
 
