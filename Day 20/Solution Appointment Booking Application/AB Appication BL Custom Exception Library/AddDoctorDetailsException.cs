@@ -4,7 +4,7 @@
     {
         string message = string.Empty;
         public AddDoctorDetailsException() {
-            message = "Error in adding doctor details , check the details given by you";
+            message = "Error in adding doctor details,check the details given by you";
         }
 
         public override string Message => message;

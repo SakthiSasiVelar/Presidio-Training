@@ -20,7 +20,7 @@ namespace AppointmentBookingBLTest_Library
         [Test]
         public void AddDoctorSuccessTest()
         {
-            Doctor doctor = new Doctor(9 , "rohit" , "12345", "brain");
+            Doctor doctor = new Doctor(2 , "rohit" , "12345", "brain");
             doctorBL.AddDoctor(doctor);
 
             var checkAddDoctor = context.Doctors.Find(2);
@@ -32,11 +32,25 @@ namespace AppointmentBookingBLTest_Library
         public void AddDoctorExceptionTest()
         {
             Doctor doctor = new Doctor(1, "rohit", "12345", "brain");
-            doctorBL.AddDoctor(doctor);
-
             var result = Assert.Throws<AddDoctorDetailsException>(() => doctorBL.AddDoctor(doctor));
-            //Assert.AreEqual("Error in adding doctor details , check the details given by you", result.Message);
+            Assert.AreEqual("Error in adding doctor details,check the details given by you", result.Message);
         }
+        [Test]
+
+       public void deletedoctorsuccesstest()
+       {
+            doctorBL.DeleteDoctor(2);
+            var result = context.Doctors.Find(2);
+            Assert.IsNull(result);
+
+        }
+        [Test]
+
+       public void DeleteDoctorExceptionTest()
+       {
+            var result = Assert.Throws<DeleteDoctorDetailsException>(()=> doctorBL.DeleteDoctor(1));
+            Assert.AreEqual("Error in deleting doctor details , check the given id of doctor is correct", result.Message);
+       }
         [TearDown]
         public void TearDown()
         {

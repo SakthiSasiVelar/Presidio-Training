@@ -2,6 +2,7 @@
 
 using Appointment_Booking_Application_DAL_Library.Models;
 
+
 namespace Appointment_Booking_application_BL_Library
 {
     public class DoctorBL : IDoctorService
@@ -16,13 +17,15 @@ namespace Appointment_Booking_application_BL_Library
 
         public int AddDoctor(Doctor doctor)
         {
+            
             try
             {
                 context.Doctors.Add(doctor);
                 context.SaveChanges();
                 return doctor.DoctorId;
+               
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 throw new AddDoctorDetailsException();
             }   
