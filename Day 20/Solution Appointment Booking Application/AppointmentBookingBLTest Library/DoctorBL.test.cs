@@ -42,7 +42,6 @@ namespace AppointmentBookingBLTest_Library
             doctorBL.DeleteDoctor(2);
             var result = context.Doctors.Find(2);
             Assert.IsNull(result);
-
         }
         [Test]
 
