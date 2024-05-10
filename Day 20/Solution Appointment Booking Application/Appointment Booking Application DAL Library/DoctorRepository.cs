@@ -1,4 +1,4 @@
-﻿using Appointment_Booking_Application_Model_Library;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,73 +6,97 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-using Appointment_Booking_Application_Model_Library;
+using Appointment_Booking_Application_DAL_Library.Models;
 
 namespace Appointment_Booking_Application_DAL_Library
 {
     public class DoctorRepository :IRepository<int , Doctor>
     {
-        readonly Dictionary<int, Doctor> _doctors;
-
+        AppointmentBookingDbContext context;
         public DoctorRepository()
         {
-            _doctors = new Dictionary<int, Doctor>();
+            context = new AppointmentBookingDbContext();
         }
 
-        int GenerateId()
+       
+        public Doctor Add(Doctor doctor)
         {
-            if (_doctors.Count == 0) return 1;
-            int id = _doctors.Keys.Max();
-            return ++id;
-        }
-        public Doctor Add(Doctor item)
-        {
-            if (_doctors.ContainsValue(item))
+            try
             {
-                return null;
+                context.Doctors.Add(doctor);
+                context.SaveChanges();
+                return doctor;
+
             }
-            item.Id = GenerateId();
-            _doctors.Add(item.Id, item);
-            return item;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public Doctor Delete(int key)
         {
-            if (_doctors.ContainsKey(key))
+            try
             {
-                Doctor Doctor = _doctors[key];
-                _doctors.Remove(key);
-                return Doctor;
+                Doctor doctor = context.Doctors.SingleOrDefault(x => x.DoctorId == key);
+                if (doctor != null)
+                {
+                    context.Doctors.Remove(doctor);
+                    context.SaveChanges();
+                    return doctor;
+                }
+                return null;
             }
-            return null;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public Doctor Get(int key)
         {
-            if (_doctors.ContainsKey(key))
+            try
             {
-                return _doctors[key];
+                Doctor result = context.Doctors.SingleOrDefault(x => x.DoctorId == key);
+                if (result != null)
+                {
+                    context.SaveChanges();
+                    return result;
+                }
+               return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }  
 
         public List<Doctor> GetAll()
         {
-            if (_doctors.Count > 0)
+            try
             {
-                return _doctors.Values.ToList();
+                List<Doctor> result = context.Doctors.ToList();
+                context.SaveChanges();
+                return result;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Doctor Update(Doctor item)
+        public Doctor Update(Doctor doctor)
         {
-            if (_doctors.ContainsKey(item.Id))
+            try
             {
-                _doctors[item.Id] = item;
-                return item;
+                context.Doctors.Update(doctor);
+                context.SaveChanges();
+                return doctor;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

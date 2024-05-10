@@ -1,77 +1,98 @@
-﻿using Appointment_Booking_Application_Model_Library;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Appointment_Booking_Application_Model_Library;
+using Appointment_Booking_Application_DAL_Library.Models;
+
 
 namespace Appointment_Booking_Application_DAL_Library
 {
     public class AppointmentRepository
     {
-        readonly Dictionary<int, Appointment> _appointments;
+        AppointmentBookingDbContext context;
 
         public AppointmentRepository()
         {
-            _appointments = new Dictionary<int, Appointment>();
+            context = new AppointmentBookingDbContext();
         }
 
-        int GenerateId()
-        {
-            if (_appointments.Count == 0) return 1;
-            int id = _appointments.Keys.Max();
-            return ++id;
-        }
         public Appointment Add(Appointment item)
         {
-            if (_appointments.ContainsValue(item))
+            try
             {
-                return null;
+                context.Appointments.Add(item);
+                context.SaveChanges();
+                return item;
             }
-            item.Id = GenerateId();
-            _appointments.Add(item.Id, item);
-            return item;
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+           
         }
 
         public Appointment Delete(int key)
         {
-            if (_appointments.ContainsKey(key))
+            try
             {
-                Appointment Appointment = _appointments[key];
-                _appointments.Remove(key);
-                return Appointment;
+                Appointment appointment = context.Appointments.SingleOrDefault(x => x.AppointmentId == key);
+                context.Appointments.Remove(appointment);
+                context.SaveChanges();
+                return appointment;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Appointment Get(int key)
         {
-            if (_appointments.ContainsKey(key))
+            try
             {
-                return _appointments[key];
+                Appointment appointment = context.Appointments.SingleOrDefault(x => x.AppointmentId == appointmentId);
+                if (appointment != null)
+                {
+                    context.SaveChanges();
+                    return appointment;
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<Appointment> GetAll()
         {
-            if (_appointments.Count > 0)
+            try
             {
-                return _appointments.Values.ToList();
+                List<Appointment> appointments = context.Appointments.ToList();
+                context.SaveChanges();
+                return appointments;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Appointment Update(Appointment item)
         {
-            if (_appointments.ContainsKey(item.Id))
+            try
             {
-                _appointments[item.Id] = item;
+                context.Appointments.Update(item);
+                context.SaveChanges();
                 return item;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

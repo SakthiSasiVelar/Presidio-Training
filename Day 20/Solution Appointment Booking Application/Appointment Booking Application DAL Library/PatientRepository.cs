@@ -4,73 +4,96 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Appointment_Booking_Application_Model_Library;
+using Appointment_Booking_Application_DAL_Library.Models;
 
 namespace Appointment_Booking_Application_DAL_Library
 {
     public class PatientRepository : IRepository<int, Patient>
     {
-        readonly Dictionary<int, Patient> _patients;
+        AppointmentBookingDbContext context;
 
         public PatientRepository()
         {
-            _patients = new Dictionary<int, Patient>(); 
+            context = new AppointmentBookingDbContext();
         }
 
-        int GenerateId()
+        public Patient Add(Patient patient)
         {
-            if (_patients.Count == 0) return 1;
-            int id = _patients.Keys.Max();
-            return ++id;
-        }
-        public Patient Add(Patient item)
-        {
-            if (_patients.ContainsValue(item))
+            try
             {
-                return null;
+                context.Patients.Add(patient);
+                context.SaveChanges();
+                return patient;
             }
-            item.Id = GenerateId();
-            _patients.Add(item.Id, item);
-            return item;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Patient Delete(int key)
         {
-            if (_patients.ContainsKey(key))
+            try
             {
-                Patient patient = _patients[key];
-                _patients.Remove(key);
-                return patient;
+                Patient patient = context.Patients.SingleOrDefault(x => x.PatientId == key);
+                if (patient != null)
+                {
+                    context.Patients.Remove(patient);
+                    context.SaveChanges();
+                    return patient;
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Patient Get(int key)
         {
-            if(_patients.ContainsKey(key))
+            try
             {
-                return _patients[key];
+                Patient result = context.Patients.SingleOrDefault(x => x.PatientId == key);
+                if (result != null)
+                {
+                    context.SaveChanges();
+                    return result;
+                }
+                return null;
             }
-            return null;
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<Patient> GetAll()
         {
-            if(_patients.Count > 0)
+            try
             {
-               return _patients.Values.ToList();
+                List<Patient> result = context.Patients.ToList();
+                context.SaveChanges();
+                return result;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Patient Update(Patient item)
         {
-            if(_patients.ContainsKey(item.Id))
+            try
             {
-                _patients[item.Id] = item;
+                context.Patients.Update(item);
+                context.SaveChanges();
                 return item;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
