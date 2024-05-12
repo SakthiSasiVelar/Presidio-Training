@@ -13,7 +13,7 @@ namespace RequestTrackerBLLibrary
 
          Task<List<Request>> ViewRequest(int id);
 
-         Task<int> CloseRequest(int id);
+         Task<int> CloseRequest(int id , int EmployeeId);
 
          Task<IList<Request>> ViewAllRequest();
 

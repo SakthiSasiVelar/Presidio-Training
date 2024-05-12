@@ -92,7 +92,7 @@ namespace RequestTrackerFEAPP
             }
         }
 
-        async Task ShowAllOpenRequest()
+        async Task ShowAllOpenRequest(int id)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace RequestTrackerFEAPP
                     await Console.Out.WriteLineAsync($"{request.RequestNumber} | {request.RequestRaisedBy} | {request.RequestMessage} | {request.RequestDate} | {request.RequestStatus}");
                 }
                 await Console.Out.WriteLineAsync("----------------------------------------------------------");
-                await CloseRequest();
+                await CloseRequest(id);
             }
             catch(Exception ex)
             {
@@ -113,14 +113,14 @@ namespace RequestTrackerFEAPP
             }
         }
 
-        async Task CloseRequest()
+        async Task CloseRequest(int id)
         {
             try
             {
                 await Console.Out.WriteLineAsync("Enter request id to mark as close");
                 int requestId = Convert.ToInt32(Console.ReadLine());
                 EmployeeRequestBL employeeRequestBL = new EmployeeRequestBL();
-                var result = await employeeRequestBL.CloseRequest(requestId);
+                var result = await employeeRequestBL.CloseRequest(requestId , id);
                 await Console.Out.WriteLineAsync($"The request of id {result} is closed successfully");
             }
             catch (Exception ex)
@@ -361,7 +361,7 @@ namespace RequestTrackerFEAPP
                         await GetSolutionDetails();
                         break;
                     case 7:
-                        await ShowAllOpenRequest();
+                        await ShowAllOpenRequest(admin.Id);
                         break;
                     case 8:
                         await ViewFeedbacks();

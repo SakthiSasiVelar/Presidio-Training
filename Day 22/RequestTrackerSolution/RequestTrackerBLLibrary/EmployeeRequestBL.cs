@@ -95,7 +95,7 @@ namespace RequestTrackerBLLibrary
             }
         }
 
-        public async Task<int> CloseRequest(int id)
+        public async Task<int> CloseRequest(int id , int EmployeeId)
         {
             try
             {
@@ -103,6 +103,7 @@ namespace RequestTrackerBLLibrary
                 if (request != null) 
                 {
                     request.RequestStatus = "close";
+                    request.RequestClosedBy = EmployeeId;
                     var updatedRequest = await _requestRepository.Update(request);
                     return updatedRequest.RequestNumber;
                 }
