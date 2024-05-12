@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace RequestTrackerBLLibrary
 {
-    public interface IEmployeeLoginBL
+    public interface IEmployeeFeedBack
     {
-        public Task<Employee> Login(Employee employee);
-        public Task<Employee> Register(Employee employee);
+        Task<int> AddFeedBack(SolutionFeedback solutionFeedback);
+
+        Task<List<SolutionFeedback>> GetFeedBack(int id);
     }
 }

@@ -8,19 +8,15 @@ using System.Threading.Tasks;
 
 namespace RequestTrackerDALLibrary
 {
-    public class EmployeeSolutionRepository :EmployeeRepository
+    public class SolutionRequestFeedBackRepository : SolutionRequestRepository
     {
-        public EmployeeSolutionRepository(RequestTrackerContext context) : base(context)
-        {
+        public SolutionRequestFeedBackRepository(RequestTrackerContext context) : base(context) { } 
 
-        }
-
-        public override async Task<IList<Employee>> GetAll()
+        public override async Task<IList<SolutionRequest>> GetAll()
         {
             try
             {
-               return await _context.Employees.Include(e => e.SolutionsProvided).ToListAsync();
-
+                return await context.Solutions.Include(s => s.Feedbacks).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -28,13 +24,11 @@ namespace RequestTrackerDALLibrary
             }
         }
 
-        public override async Task<Employee> GetById(int key)
+        public override async Task<SolutionRequest> GetById(int key)
         {
             try
             {
-                var employee = await _context.Employees.Include(e => e.SolutionsProvided).SingleOrDefaultAsync(e => e.Id == key);
-                return employee;
-
+                return await context.Solutions.Include(s => s.Feedbacks).SingleOrDefaultAsync(solution => solution.SolutionId == key);
             }
             catch (Exception ex)
             {

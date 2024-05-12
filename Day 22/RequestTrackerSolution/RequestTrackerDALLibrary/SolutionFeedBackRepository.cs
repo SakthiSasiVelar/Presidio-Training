@@ -8,84 +8,80 @@ using System.Threading.Tasks;
 
 namespace RequestTrackerDALLibrary
 {
-    public class RequestRepository  : IRepository<int,Request>
+    public class SolutionFeedBackRepository : IRepository<int , SolutionFeedback>
     {
         protected RequestTrackerContext context;
 
-        public RequestRepository(RequestTrackerContext context)
+        public SolutionFeedBackRepository(RequestTrackerContext context)
         {
             this.context = context;
         }
 
-        public async Task<Request> Add(Request entity)
+        public async Task<SolutionFeedback> Add(SolutionFeedback entity)
         {
             try
             {
-                context.Requests.Add(entity);
+                context.Feedbacks.Add(entity);
                 await context.SaveChangesAsync();
                 return entity;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
                 throw new Exception(ex.Message);
             }
-            
         }
 
-        public async Task<Request> Delete(int key)
+        public async Task<SolutionFeedback> Delete(int key)
         {
             try
             {
                 var entity = await GetById(key);
                 if(entity != null)
                 {
-                    context.Requests.Remove(entity);
+                    context.Feedbacks.Remove(entity);
                     await context.SaveChangesAsync();
                     return entity;
                 }
                 return null;
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            throw new NotImplementedException();
-        }
-
-        public virtual async Task<Request> GetById(int key)
-        {
-            try
-            {
-                return context.Requests.SingleOrDefault(r => r.RequestNumber == key);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            throw new NotImplementedException();
-        }
-
-        public virtual async Task<IList<Request>> GetAll()
-        {
-            try
-            {
-                return await context.Requests.ToListAsync();
-            }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
 
-        public async Task<Request> Update(Request entity)
+        public async Task<IList<SolutionFeedback>> GetAll()
         {
             try
             {
-                var request = await GetById(entity.RequestNumber);
-                if(request != null)
+                return await context.Feedbacks.ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async  Task<SolutionFeedback> GetById(int key)
+        {
+            try
+            {
+                return await context.Feedbacks.SingleOrDefaultAsync(feedback => feedback.FeedbackId == key);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<SolutionFeedback> Update(SolutionFeedback entity)
+        {
+            try
+            {
+                var exisitingEntity = await GetById(entity.FeedbackId);
+                if(exisitingEntity != null)
                 {
-                    context.Requests.Update(entity);
+                    context.Feedbacks.Update(entity);
                     await context.SaveChangesAsync();
                     return entity;
                 }

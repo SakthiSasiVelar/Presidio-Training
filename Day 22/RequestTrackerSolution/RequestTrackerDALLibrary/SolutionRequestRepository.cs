@@ -8,39 +8,38 @@ using System.Threading.Tasks;
 
 namespace RequestTrackerDALLibrary
 {
-    public class RequestRepository  : IRepository<int,Request>
+    public class SolutionRequestRepository : IRepository<int , SolutionRequest>
     {
         protected RequestTrackerContext context;
 
-        public RequestRepository(RequestTrackerContext context)
+        public SolutionRequestRepository(RequestTrackerContext context)
         {
             this.context = context;
         }
 
-        public async Task<Request> Add(Request entity)
+        public async Task<SolutionRequest> Add(SolutionRequest entity)
         {
             try
             {
-                context.Requests.Add(entity);
+                context.Solutions.Add(entity);
                 await context.SaveChangesAsync();
                 return entity;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                
                 throw new Exception(ex.Message);
             }
-            
         }
 
-        public async Task<Request> Delete(int key)
+        public async Task<SolutionRequest> Delete(int key)
         {
             try
             {
                 var entity = await GetById(key);
-                if(entity != null)
+                if (entity != null)
                 {
-                    context.Requests.Remove(entity);
+                    context.Solutions.Remove(entity);
                     await context.SaveChangesAsync();
                     return entity;
                 }
@@ -50,27 +49,13 @@ namespace RequestTrackerDALLibrary
             {
                 throw new Exception(ex.Message);
             }
-            throw new NotImplementedException();
         }
 
-        public virtual async Task<Request> GetById(int key)
+        public virtual async Task<IList<SolutionRequest>> GetAll()
         {
             try
             {
-                return context.Requests.SingleOrDefault(r => r.RequestNumber == key);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            throw new NotImplementedException();
-        }
-
-        public virtual async Task<IList<Request>> GetAll()
-        {
-            try
-            {
-                return await context.Requests.ToListAsync();
+                return await context.Solutions.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -78,20 +63,32 @@ namespace RequestTrackerDALLibrary
             }
         }
 
-        public async Task<Request> Update(Request entity)
+        public virtual async Task<SolutionRequest> GetById(int key)
         {
             try
             {
-                var request = await GetById(entity.RequestNumber);
-                if(request != null)
+                return await context.Solutions.SingleOrDefaultAsync(solution => solution.SolutionId == key);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<SolutionRequest> Update(SolutionRequest entity)
+        {
+            try
+            {
+                var exisitingEntity = await GetById(entity.SolutionId);
+                if (exisitingEntity != null)
                 {
-                    context.Requests.Update(entity);
+                    context.Solutions.Update(entity);
                     await context.SaveChangesAsync();
                     return entity;
                 }
                 return null;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

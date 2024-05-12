@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RequestTrackerModelLibrary
 {
-    public class RequestSolution
+    public class SolutionRequest
     {
         [Key]
         public int SolutionId { get; set; }
