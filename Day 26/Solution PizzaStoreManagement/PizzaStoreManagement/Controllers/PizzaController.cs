@@ -17,7 +17,7 @@ namespace PizzaStoreManagement.Controllers
             _pizzaService = pizzaService;
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost("addPizza")]
         [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status400BadRequest)]

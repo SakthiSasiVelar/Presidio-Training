@@ -24,7 +24,8 @@ namespace PizzaStoreManagement.Services
             {
                 string token = string.Empty;
                 var claims = new List<Claim>(){
-                new Claim(ClaimTypes.Name, user.Id.ToString()) };
+                new Claim(ClaimTypes.Name, user.Id.ToString()),
+                new Claim(ClaimTypes.Role, user.Role.ToString())};
                 var credentials = new SigningCredentials(_symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
                 var myToken = new JwtSecurityToken(null, null, claims, expires: DateTime.Now.AddDays(2), signingCredentials: credentials);
                 token = new JwtSecurityTokenHandler().WriteToken(myToken);
