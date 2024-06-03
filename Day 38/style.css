@@ -1,0 +1,129 @@
+div,h1,h3,p,section,header,span{
+    margin:0;
+    padding: 0;
+}
+.container{
+    width:800px;
+    height: auto;
+    border:2px solid red;
+    outline: 2px solid red;
+    margin:1.5rem 2rem;
+    padding: 0.7rem 0.5rem
+}
+
+.header{
+   
+    display: flex;
+    justify-content: space-between;
+}
+
+.header > div > p{
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0.3rem;
+}
+
+.header > div > img{
+    float:right;
+}
+
+.container > h1{
+    text-align: center;
+    color: rgb(5, 83, 114);
+}
+
+.container > h3{
+    text-align: center;
+}
+
+.student-information-container{
+    margin:1rem 3rem;
+}
+
+.student-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+.student-info > div > p > span{
+    font-weight: bolder;
+}
+
+.header-semester3{
+    text-align: center;
+    border-width: 3px 3px 0 3px;
+    border-style: solid;
+    border-color: black;
+    background-color: pink;
+}
+
+table{
+    border-collapse: collapse;
+    width:100%;
+}
+
+th{
+    border: 3px solid black;
+    background-color: red;
+    padding: 0.4rem;
+}
+td{
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+}
+tr{
+    text-align: center;
+}
+.subject-name{
+    text-align: left;
+    padding-left: 0.2rem;
+}
+
+.total-row{
+    font-weight: bolder;;
+    border: 3px solid black;
+}
+
+.total-row > td{
+    padding: 0.5rem;
+    
+}
+.header-semester4{
+    text-align: center;
+    border-width: 0px 3px;
+    border-style: solid;
+    border-color: black;
+    background-color: pink;
+}
+.Result{
+    font-weight: bolder;
+    padding: 1rem 0rem;
+}
+
+.final-table > thead > tr >th{
+   background-color: white;
+}
+
+.final-table >tbody > tr > td{
+    border-bottom: 3px solid black;
+}
+.date{
+    margin-top:2rem;
+}
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.rectangle{
+    width:150px;
+    height:30px;
+    background-color: rgb(158, 158, 12);
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.footer > p {
+    margin-top: 2rem;
+}
