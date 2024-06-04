@@ -1,0 +1,152 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: black;
+    color: white;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    margin : 1.5rem 3rem;
+}
+
+#navBar {
+    display: flex;
+    column-gap:2rem;
+}
+
+#navBar > a{
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.line{
+    width:1.5rem;
+    height:3px;;
+}
+
+#nav-btn{
+    display: none;
+}
+
+#intro-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 5rem; 
+    gap:6rem;
+}
+
+#intro-section > p{
+    font-size: 1.5rem;
+    text-align: justify;
+    padding-top:3rem;
+}
+
+.academics > h1 , .skills > h1 , footer>h3,
+footer>h1{
+  text-align: center;
+}
+
+footer>h1{
+    font-size: 24px;
+}
+
+.academics > div , .skills>div{
+    display: flex;
+    justify-content: space-between;
+    gap:1rem;
+    margin: 2rem 5rem;
+    text-align: center;
+}
+
+.academics > div > div{
+    border :2px solid red
+}
+
+.academics > div > div > p{
+    font-size: 1.5rem;
+    padding: 0.5rem;
+}
+
+.degree{
+    color: blue;
+}
+
+
+ footer > form{
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem;
+  margin:2rem 3rem;
+ }
+
+ .submit-btn{
+    padding: 0.5rem 1rem;
+    background-color: lightgreen;
+    margin-left: 5rem;
+ }
+
+
+
+@media only screen and (max-width: 767px) {
+    #navBar{
+        display: none;
+    }
+    #nav-btn{
+        display: flex;
+        flex-direction: column;
+        row-gap:4px;
+        padding-top: 0.5rem;
+    }
+    #navBar.active{
+        display: flex;
+        flex-direction: column;
+        row-gap: 2rem;
+        position: absolute;
+        right:0;
+        top:5rem;
+        padding-right: 4rem;
+    }
+
+    #intro-section > p{
+        font-size: 1rem;
+    }
+
+    .academics>div , .skills>div {
+        flex-direction: column;
+        margin: 2rem 3rem;
+    }
+    .academics>div>div>p {
+        font-size: 1rem;
+    }
+  
+   
+        
+   
+}
+
+@media only screen and (max-width:980px){
+#intro-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem;
+        row-gap: 2rem;
+    }
+
+    #intro-section>p {
+        color: white(241, 233, 233);
+        font-size: 1rem;
+        padding-right: 0rem;
+        padding-top: 0rem;
+    }
+
+    #intro-section > img {
+        width:70%;
+    }
+}
