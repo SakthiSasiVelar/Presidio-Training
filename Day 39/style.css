@@ -27,7 +27,8 @@ header{
 
 .line{
     width:1.5rem;
-    height:3px;;
+    height:3px;
+    background-color: white;
 }
 
 #nav-btn{
