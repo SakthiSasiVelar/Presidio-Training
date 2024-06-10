@@ -109,7 +109,7 @@
 
 thead {
     position: sticky;
-    top: 7%;
+    top: 4rem;
 }
 
 thead > tr{
