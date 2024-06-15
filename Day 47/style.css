@@ -1,0 +1,78 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100vw;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+.register-container{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border: 1px solid black;
+    row-gap: 1rem;
+}
+
+.register-container > h1 {
+    text-align: center;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    row-gap: 1rem;
+}
+
+.label-input-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.2rem;
+}
+
+.label-input-container > input ,
+.label-input-container > select{
+    padding: 0.5rem;
+}
+
+.radio-label-input-container ,
+.checkbox-label-input-container{
+    display: flex;
+    column-gap: 0.4rem;
+    row-gap: 0.5rem;
+}
+
+.radio-container{
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.submit-btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-btn-container > button {
+    padding: 0.5rem 1rem;
+    background-color: lightblue;
+    border-radius: 5px;
+}
+
+.error-list {
+    color: red;
+}
+
+#other-profession{
+    display: none;
+}

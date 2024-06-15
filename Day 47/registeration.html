@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resigter</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="registeration.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="register-container">
+        <h1>Register</h1>
+        <form class="form-container" id="form">
+          <div class="label-input-container">
+            <div>Name :</div>
+            <input type="text" name="name" />
+          </div>
+          <div class="label-input-container">
+            <div>Phone number :</div>
+            <input type="number" name="phone-number" />
+          </div>
+          <div class="label-input-container">
+            <div>Email :</div>
+            <input type="email" name="email" />
+          </div>
+          <div class="label-input-container">
+            <div>Date of birth :</div>
+            <input type="date" name="dob" id="dob" onfocus="getMaxDate()" onblur="getAge()" />
+          </div>
+          <div class="label-input-container">
+            <div>Age :</div>
+            <input type="number" name="age" id="age" disabled />
+          </div>
+          <div class="label-input-container">
+            <div>Gender :</div>
+            <div class="radio-container">
+              <div class="radio-label-input-container">
+                <input type="radio" name="gender" value="male" />
+                <div>Male</div>
+              </div>
+              <div class="radio-label-input-container">
+                <input type="radio" name="gender" value="female" />
+                <div>Female</div>
+              </div>
+              <div class="radio-label-input-container">
+                <input type="radio" name="gender" value="other" />
+                <div>Other</div>
+              </div>
+            </div>
+          </div>
+          <div class="label-input-container">
+            <div>Qualification :</div>
+            <div>
+              <div class="checkbox-label-input-container">
+                <input type="checkbox" name="qualification" value="SSLC" />
+                <div>SSLC</div>
+              </div>
+              <div class="checkbox-label-input-container">
+                <input type="checkbox" name="qualification" value="HSC" />
+                <div>HSC</div>
+              </div>
+              <div class="checkbox-label-input-container">
+                <input type="checkbox" name="qualification" value="Diploma" />
+                <div>Diploma</div>
+              </div>
+              <div class="checkbox-label-input-container">
+                <input type="checkbox" name="qualification" value="UG" />
+                <div>UG</div>
+              </div>
+              <div class="checkbox-label-input-container">
+                <input type="checkbox" name="qualification" value="PG" />
+                <div>PG</div>
+              </div>
+            </div>
+          </div>
+          <div class="label-input-container">
+            <div>Profession :</div>
+            <select name="profession" id="profession">
+              <option value="" disabled selected>Select the profession</option>
+            </select>
+          </div>
+          <div class="label-input-container" id="other-profession" >
+              <div>Other :</div>
+              <input type="text" id="new-profession"  name="other-profession" />
+            </div>
+            <div class="submit-btn-container">
+              <button type="submit">Submit</button>
+            </div>
+          <div class="error-list" id="error"></div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
