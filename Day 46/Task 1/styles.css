@@ -1,0 +1,33 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.form-container > form{
+    display: flex;
+    width:500px;
+    flex-direction: column;
+    padding: 2rem;
+    border: 1px solid red;
+    row-gap: 1.5rem;
+}
+
+.form-container > h1 {
+    text-align: center;
+}
+
+form> button{
+    width: 100px;
+    padding: 0.5rem;
+}

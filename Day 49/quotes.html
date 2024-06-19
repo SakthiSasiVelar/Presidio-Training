@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quotes</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="quotes img.png" type="image/x-icon" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="quotes.html">Quotes</a></li>
+      </ul>
+    </nav>
+    <main>
+      <h1>Quotes</h1>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="search by author" />
+        <button id="search-btn" onclick="search()" onblur="search()">
+          Search
+        </button>
+        <select id="sort-select">
+            <option value="" disabled selected>Select the sort</option>
+          <option value="atoz">A to Z</option>
+          <option value="ztoa">Z to A</option>
+        </select>
+      </div>
+      <div id="quotes-container"></div>
+      <div id="pagination">
+        <button id="prev-page">Previous</button>
+        <button id="next-page">Next</button>
+      </div>
+    </main>
+    <script src="scripts.js"></script>
+  </body>
+</html>

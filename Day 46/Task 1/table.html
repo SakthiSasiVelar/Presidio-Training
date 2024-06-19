@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>table</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="table.js" async></script>
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>Add Product</h1>
+      <form id="product-form">
+        <div class="input-container">
+          <div>Id</div>
+          <input type="number" id="id" name="id" />
+          <div id="error-container"></div>
+        </div>
+        <div class="input-container">
+          <div>Product Name</div>
+          <input type="text" id="name" name="name"  />
+        </div>
+        <div class="input-container">
+          <div>Price</div>
+          <input type="number" step="any" id="price" name="price"  />
+        </div>
+        <div class="input-container">
+          <div>Quantity</div>
+          <input type="number" id="quantity" name="quantity"  />
+        </div>
+        <button type="submit">Add</button>
+      </form>
+    </div>
+    <table id="product-table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Product 1</td>
+        <td>$10.00</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Product 2</td>
+        <td>$15.00</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Product 3</td>
+        <td>$20.00</td>
+        <td>3</td>
+      </tr>
+    </table>
+  </body>
+</html>
