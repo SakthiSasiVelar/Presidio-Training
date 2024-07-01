@@ -1,0 +1,5 @@
+name: sakthi
+dob: 2003-05-27
+phone: 1234567890
+email: sakthi@gmail.com
+age: 21
