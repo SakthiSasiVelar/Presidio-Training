@@ -1,0 +1,157 @@
+pull the instance of postgre
+create a database - dbDocker
+Create tables - Employee, Department, Salary with proper relation respectively
+Insert data in to tables 
+log off the instance
+run instance again 
+execute a select query that prints 
+employee_name, age, phone, Department_name and salary
+
+
+
+C:\Users\VC>docker pull postgres
+Using default tag: latest
+latest: Pulling from library/postgres
+f11c1adaa26e: Pull complete
+76ce212b9153: Pull complete
+919ca406a058: Pull complete
+6b7a1245fe71: Pull complete
+8064ffe06c65: Pull complete
+4b5c59f2d82c: Pull complete
+fe72764b9070: Pull complete
+6ef8e2c0f4d9: Pull complete
+e71fe9d7ff11: Pull complete
+f3225d69190d: Pull complete
+2bf90d17afc8: Pull complete
+d3aee49eb079: Pull complete
+e1e856658919: Pull complete
+95c2c2ef9f02: Pull complete
+Digest: sha256:0aafd2ae7e6c391f39fb6b7621632d79f54068faebc726caf469e87bd1d301c0
+Status: Downloaded newer image for postgres:latest
+docker.io/library/postgres:latest
+
+C:\Users\VC>docker run --name my-postgres-container -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+bd2325a91b681d90ac65b3702ee9baa4ffa6ec60749643dbae3c4b77de4abfee
+
+C:\Users\VC>docker exec -it my-postgres-container bash
+root@bd2325a91b68:/# psql -U postgres
+psql (16.3 (Debian 16.3-1.pgdg120+1))
+Type "help" for help.
+
+postgres=# help
+You are using psql, the command-line interface to PostgreSQL.
+Type:  \copyright for distribution terms
+       \h for help with SQL commands
+       \? for help with psql commands
+       \g or terminate with semicolon to execute query
+       \q to quit
+postgres=# CREATE DATABASE dbDocker;
+CREATE DATABASE
+postgres=# \c dbDocker
+connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "dbDocker" does not exist
+Previous connection kept
+postgres=# psql -U postgres
+postgres-# create database dbDocker
+postgres-# \c dbDocker
+connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "dbDocker" does not exist
+Previous connection kept
+postgres-# \q
+root@bd2325a91b68:/# psql -U postgres -d dbDocker
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "dbDocker" does not exist
+root@bd2325a91b68:/# psql -U postgres
+psql (16.3 (Debian 16.3-1.pgdg120+1))
+Type "help" for help.
+postgres=# help
+You are using psql, the command-line interface to PostgreSQL.
+Type:  \copyright for distribution terms
+       \h for help with SQL commands
+       \? for help with psql commands
+       \g or terminate with semicolon to execute query
+       \q to quit
+
+postgres=# create database dbDocker;
+CREATE DATABASE
+postgres=# -- Create Department Table
+postgres=# CREATE TABLE Department (
+postgres(#     DepartmentID SERIAL PRIMARY KEY,
+postgres(#     DepartmentName VARCHAR(100) NOT NULL
+postgres(# );
+CREATE TABLE
+postgres=#
+postgres=# -- Create Employee Table
+postgres=# CREATE TABLE Employee (
+postgres(#     EmployeeID SERIAL PRIMARY KEY,
+postgres(#     EmployeeName VARCHAR(100) NOT NULL,
+postgres(#     Age INT,
+postgres(#     PhoneNumber VARCHAR(20),
+postgres(#     Salary DECIMAL(10, 2),
+postgres(#     DepartmentID INT,
+postgres(#     FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+postgres(# );
+CREATE TABLE
+postgres=# -- Insert Data into Department
+postgres=# INSERT INTO Department (DepartmentName) VALUES ('HR');
+INSERT 0 1
+postgres=# INSERT INTO Department (DepartmentName) VALUES ('Engineering');
+INSERT 0 1
+postgres=# INSERT INTO Department (DepartmentName) VALUES ('Marketing');
+INSERT 0 1
+postgres=#
+postgres=# -- Insert Data into Employee
+postgres=# INSERT INTO Employee (EmployeeName, Age, PhoneNumber, Salary, DepartmentID) VALUES ('Alice', 30, '123-456-7890', 60000.00, 1);
+INSERT 0 1
+postgres=# INSERT INTO Employee (EmployeeName, Age, PhoneNumber, Salary, DepartmentID) VALUES ('Bob', 35, '987-654-3210', 80000.00, 2);
+INSERT 0 1
+postgres=# INSERT INTO Employee (EmployeeName, Age, PhoneNumber, Salary, DepartmentID) VALUES ('Charlie', 28, '555-123-4567', 70000.00, 3);
+INSERT 0 1
+postgres=# -- Select Data from Department
+postgres=# SELECT * FROM Department;
+ departmentid | departmentname
+--------------+----------------
+            1 | HR
+            2 | Engineering
+            3 | Marketing
+(3 rows)
+
+postgres=#
+postgres=# -- Select Data from Employee
+postgres=# SELECT * FROM Employee;
+ employeeid | employeename | age | phonenumber  |  salary  | departmentid
+------------+--------------+-----+--------------+----------+--------------
+          1 | Alice        |  30 | 123-456-7890 | 60000.00 |            1
+          2 | Bob          |  35 | 987-654-3210 | 80000.00 |            2
+          3 | Charlie      |  28 | 555-123-4567 | 70000.00 |            3
+(3 rows)
+
+postgres=# \q
+root@bd2325a91b68:/# exit
+exit
+
+C:\Users\VC>docker ps
+CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS          PORTS      NAMES
+bd2325a91b68   postgres   "docker-entrypoint.s…"   46 minutes ago   Up 16 minutes   5432/tcp   my-postgres-container
+
+C:\Users\VC>docker stop bd2325a91b68
+bd2325a91b68
+
+C:\Users\VC>docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\VC>docker start bd2325a91b68
+bd2325a91b68
+
+C:\Users\VC>docker exec -it bd2325a91b68 bash
+root@bd2325a91b68:/# psql -U postgres
+psql (16.3 (Debian 16.3-1.pgdg120+1))
+Type "help" for help.
+
+postgres=# select e. employeename,e.age,e.phonenumber,e.salary,d.departmentname from employee as e join department as d where e.departmentid = d.departmentid;
+ERROR:  syntax error at or near "where"
+LINE 1: ...tmentname from employee as e join department as d where e.de...
+                                                             ^
+postgres=# select e. employeename,e.age,e.phonenumber,e.salary,d.departmentname from employee as e join department as d on e.departmentid = d.departmentid;
+ employeename | age | phonenumber  |  salary  | departmentname
+--------------+-----+--------------+----------+----------------
+ Alice        |  30 | 123-456-7890 | 60000.00 | HR
+ Bob          |  35 | 987-654-3210 | 80000.00 | Engineering
+ Charlie      |  28 | 555-123-4567 | 70000.00 | Marketing
