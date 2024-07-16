@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.game-container {
+    text-align: center;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(5, 50px);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ced4da;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.cell.correct {
+    background-color: #6aa84f;
+    color: white;
+}
+
+.cell.present {
+    background-color: #f1c232;
+    color: white;
+}
+
+.cell.absent {
+    background-color: #d5d5d5;
+    color: white;
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+#guess-input {
+    font-size: 1rem;
+    padding: 5px;
+    width: 100px;
+    text-transform: uppercase;
+}
