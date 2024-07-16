@@ -12,8 +12,8 @@ using PizzaStoreManagement.Contexts;
 namespace PizzaStoreManagement.Migrations
 {
     [DbContext(typeof(PizzaStoreManagementDbContext))]
-    [Migration("20240517054155_roleAdd")]
-    partial class roleAdd
+    [Migration("20240716051056_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
