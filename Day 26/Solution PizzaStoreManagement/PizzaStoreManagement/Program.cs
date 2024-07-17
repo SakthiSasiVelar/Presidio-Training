@@ -10,6 +10,10 @@ using PizzaStoreManagement.Repository;
 using PizzaStoreManagement.Services;
 using System.Diagnostics;
 using System.Text;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Microsoft.Extensions.Configuration;
+using Azure.Extensions.AspNetCore.Configuration.Secrets;
 
 namespace PizzaStoreManagement
 {
@@ -64,9 +68,21 @@ namespace PizzaStoreManagement
                 });
 
             #region Context
-            Debug.WriteLine(builder.Configuration.GetConnectionString("defaultConnection"));
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            // Retrieve the Key Vault URI from appsettings.json
+            var keyVaultUri = builder.Configuration["KeyVault:VaultUri"];
+
+            if (!string.IsNullOrEmpty(keyVaultUri))
+            {
+                var credential = new DefaultAzureCredential();
+                var client = new SecretClient(new Uri(keyVaultUri), credential);
+
+                builder.Configuration.AddAzureKeyVault(client, new KeyVaultSecretManager());
+            }
+
             builder.Services.AddDbContext<PizzaStoreManagementDbContext>(
-                options => options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection")) );
+                options => options.UseSqlServer(builder.Configuration["dbConnectionString2"]) );
 
             #endregion
 
